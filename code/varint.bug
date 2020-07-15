@@ -1,11 +1,8 @@
 
-# varying-intercept intercept allometry model 
-# with biomass as a species predictor 
-
 model {
-  for (k in 1:n){
-    y[k] ~ dnorm (y.hat[k], tau.y)
-    y.hat[k] <- a[species[k]] + b *x[k]
+  for (i in 1:n){
+    y[i] ~ dnorm (mu[i], tau.y)
+    mu[i] <- a[species[i]] + b *x[i]
   }
 
   tau.y <- pow(sigma.y, -2)
@@ -15,11 +12,11 @@ model {
     a[j] ~ dnorm (mu.a, tau.a)
   }
   
-  mu.a ~ dnorm (0, .001)
+  mu.a ~ dnorm (0, 0.001)
   tau.a <- pow(sigma.a, -2)
   sigma.a ~ dunif (0, 100)
 
-  b ~ dnorm (0, .001)
+  b ~ dnorm (0, 0.001)
 
 }
 
