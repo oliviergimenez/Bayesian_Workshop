@@ -1,4 +1,5 @@
-# Bayesian statistics - Olivier Gimenez, July 2020
+# Bayesian statistics 
+#### Olivier Gimenez, July 2020
 
 ## Slides codes and data
 
