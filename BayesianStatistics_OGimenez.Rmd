@@ -2445,6 +2445,6 @@ knitr::include_graphics('img/whytwitter.png')
 
 <!-- # Generate R code only -->
 <!-- ```{r} -->
-<!-- knitr::purl('lectures.Rmd') -->
+<!-- knitr::purl('BayesianStatistics_OGimenez.Rmd') -->
 <!-- ``` -->
 
