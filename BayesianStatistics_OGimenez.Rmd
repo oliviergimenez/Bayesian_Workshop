@@ -60,12 +60,18 @@ insert_html_math <- make_latex_decorator("", "$$")
 * Slides available on FigShare [https://doi.org/10.6084/m9.figshare.12656894.v1](https://doi.org/10.6084/m9.figshare.12656894.v1).
 * Material available via [https://github.com/oliviergimenez/Bayesian_Workshop](https://github.com/oliviergimenez/Bayesian_Workshop).
 
-## Why are you here?
+## Objectives
 
-* We will try and demystify Bayesian statistics, and what we call MCMC.
-* You will be able to make the difference between Bayesian and Frequentist analyses.
-* You will be able to understand the Methods section of ecological papers doing Bayesian stuff.
-* You will be able to run your own Bayesian analysis, safely hopefully.
+* Try and demystify Bayesian statistics, and what we call MCMC.
+* Make the difference between Bayesian and Frequentist analyses.
+* Understand the Methods section of ecological papers doing Bayesian stuff.
+* Run Bayesian analyses, safely hopefully.
+
+`r insert_slide_break()`
+
+```{r, out.width = '13cm',out.height='7cm',fig.align='center',echo=FALSE}
+knitr::include_graphics('img/brace_yourself.jpeg')
+```
 
 ## What is on our plate?
 
@@ -117,6 +123,10 @@ knitr::include_graphics('img/gelmanhill.png')
 
 # What is Bayesian inference?
 
+`r insert_slide_break()`
+
+![](img/amazing-thomas-bayes-illustration.jpg)
+
 ## A reminder on conditional probabilities
 
 `r insert_inc_bullet()` $\Pr(A \mid B)$: Probability of A given B
@@ -125,20 +135,24 @@ knitr::include_graphics('img/gelmanhill.png')
 
 `r insert_inc_bullet()` $\Pr(A \mid B) = \displaystyle{\frac{\Pr(A \text{ and } B)}{\Pr(B)}}$
 
-## Screening for covid-19
+`r insert_slide_break()`
 
-`r insert_inc_bullet()` The chance of a positive test given covid $\Pr(+|\text{covid}) = 0.90$ (**sensitivity**).
+![](img/how_to_cure_vampires.jpg)
 
-`r insert_inc_bullet()` The chance of a negative test given no covid $\Pr(-|\text{no covid}) = 0.95$ (**specificity**).
+## Screening for vampirism
+
+`r insert_inc_bullet()` The chance of the  test being positive given you are a vampire is $\Pr(+|\text{vampire}) = 0.90$ (**sensitivity**).
+
+`r insert_inc_bullet()` The chance of a negative test given you are not a is $\Pr(-|\text{mortal}) = 0.95$ (**specificity**).
 
 
 ## What is the question?
 
-`r insert_inc_bullet()` From the perspective of the test: Given a person has covid, what is the probability that the test is positive? $\Pr(+|\text{covid}) = 0.90$.
+`r insert_inc_bullet()` From the perspective of the test: Given a person is a vampire, what is the probability that the test is positive? $\Pr(+|\text{vampire}) = 0.90$.
 
-`r insert_inc_bullet()` From the perspective of the person: Given that the test is positive, what is the probability that a person has covid? $\Pr(\text{covid}|+) = \; ?$
+`r insert_inc_bullet()` From the perspective of the person: Given that the test is positive, what is the probability that this person is a vampire? $\Pr(\text{vampire}|+) = \; ?$
 
-`r insert_inc_bullet()` Assume $0.1\%$ of the population has a chance of getting covid, that is $\Pr(\text{covid}) = 0.001$.
+`r insert_inc_bullet()` Assume that vampires are rare, and represent only $0.1\%$ of the population. This means that $\Pr(\text{vampire}) = 0.001$.
 
 ## What is the answer? Bayes' theorem to the rescue!
 
@@ -151,73 +165,77 @@ knitr::include_graphics('img/gelmanhill.png')
 
 \begincol
 
-- $\Pr(\text{covid}|+) = \Pr(\text{covid and } +) / \Pr(+)$
+- $\Pr(\text{vampire}|+) = \Pr(\text{vampire and } +) / \Pr(+)$
 
-- $\Pr(\text{covid and } +) = \Pr(\text{covid}) \; \Pr(+ | \text{covid}) = 0.0009$
+- $\Pr(\text{vampire and } +) = \Pr(\text{vampire}) \; \Pr(+ | \text{vampire}) = 0.0009$
 
 - $\Pr(+) = 0.0009 + 0.04995 = 0.05085$
 
-- $\Pr(\text{covid}|+) = 0.0009/0.05085 = 0.02$
+- $\Pr(\text{vampire}|+) = 0.0009/0.05085 = 0.02$
 
 \endcol
 \endcols
 
-$$\Pr(\text{covid}|+)= \displaystyle{\frac{ \Pr(+|\text{covid}) \; \Pr(\text{covid})}{\Pr(+)}}$$
+$$\Pr(\text{vampire}|+)= \displaystyle{\frac{ \Pr(+|\text{vampire}) \; \Pr(\text{vampire})}{\Pr(+)}}$$
 
 # Your turn
 
-## Screening for covid-19
+## Screening for vampirism
 
-* Suppose the diagnostic test has the same sensitivity and specificity but the covid is more common: $10\%$ of the population has a chance of getting the covid. 
+* Suppose the diagnostic test has the same sensitivity and specificity but vampirism is more common: $10\%$ of the population is vampire. 
 
-* What is the probability that a person has covid, given that the test is positive?
+* What is the probability that a person is a vampire, given that the test is positive?
 
 # Solution
 
-## The probability that a person has covid, given that the test is positive
+## The probability that a person is a vampire, given that the test is positive
 
-- $\Pr(+ | \text{covid}) = 0.9$
-- $\Pr(- | \text{no covid}) = 0.95$
-- $\Pr(\text{covid}) = 0.1$
+- $\Pr(+ | \text{vampire}) = 0.9$
+- $\Pr(- | \text{mortal}) = 0.95$
+- $\Pr(\text{vampire}) = 0.1$
 
 $$\begin{aligned}
- \Pr(+) &= \Pr(+ | \text{covid}) \Pr(\text{covid}) + \Pr(+ | \text{no covid}) \Pr(\text{no covid}) \\
+ \Pr(+) &= \Pr(+ | \text{vampire}) \Pr(\text{vampire}) + \Pr(+ | \text{mortal}) \Pr(\text{mortal}) \\
   &= 0.9*0.1 + 0.05*0.9 \\
   &=0.135
 \end{aligned}
 $$
 
 $$\begin{aligned}
- \Pr(\text{covid} | +) &= \Pr(+ | \text{covid}) \Pr(\text{covid}) / \Pr(+) \\
+ \Pr(\text{vampire} | +) &= \Pr(+ | \text{vampire}) \Pr(\text{vampire}) / \Pr(+) \\
   &= 0.9*0.1 / 0.135
 \end{aligned}
 $$
 
 ## Bayes' theorem
 
-A theorem about conditional probabilities.
+\begincols
+\begincol
 
-$$ \Pr(B \mid A) = \frac{ \Pr(A \mid B) \; \Pr(B)}{\Pr(A)} $$
+* A theorem about conditional probabilities.
 
-`r insert_slide_break()`
+* $\Pr(B \mid A) = \displaystyle{\frac{ \Pr(A \mid B) \; \Pr(B)}{\Pr(A)}}$
 
-Easy to mess up with letters. Might be easier to remember when written like this:
+\endcol
+
+\begincol
+
+![](img/bayes_neon.jpeg)
+
+\endcol
+\endcols
+
+## Bayes' theorem
+
+`r insert_inc_bullet()` Easy to mess up with letters. Might be easier to remember when written like this:
 
 $$ \Pr(\text{hypothesis} \mid \text{data}) = \frac{ \Pr(\text{data} \mid \text{hypothesis}) \; \Pr(\text{hypothesis})}{\Pr(\text{data})} $$
 
-`r insert_slide_break()`
+`r insert_inc_bullet()` The "hypothesis" is typically something unobserved or unknown. It's what you want to learn about using the data. 
 
-$$ \Pr(\text{hypothesis} \mid \text{data}) = \frac{ \Pr(\text{data} \mid \text{hypothesis}) \; \Pr(\text{hypothesis})}{\Pr(\text{data})} $$
+`r insert_inc_bullet()` For regression models, the "hypothesis" is a parameter (intercept, slopes or error terms).
 
-The "hypothesis" is typically something unobserved or unknown. It's what you 
-want to learn about using the data. 
-
-`r insert_pause()` 
-
-For regression models, the "hypothesis" is a parameter (intercept, slopes or 
-error terms).
-
-Bayes theorem tells you the probability of the hypothesis given the data.
+`r insert_inc_bullet()` Bayes theorem tells you the probability of the hypothesis given the data.
 
 
 
@@ -226,11 +244,6 @@ Bayes theorem tells you the probability of the hypothesis given the data.
 How plausible is some hypothesis given the data?
 
 $$ \Pr(\text{hypothesis} \mid \text{data}) = \frac{ \Pr(\text{data} \mid \text{hypothesis}) \; \Pr(\text{hypothesis})}{\Pr(\text{data})} $$
-
-## Reverend Thomas Bayes, back to the 18th century
-```{r, out.width = '15cm',out.height='6cm',fig.align='center',echo=FALSE}
-knitr::include_graphics('img/Thomas_Bayes.png')
-```
 
 ## Why is Bayesian statistics not the default?
 
@@ -260,7 +273,7 @@ $$\Pr(A \mid B) = \frac{\Pr(B \mid A) \; \Pr(A)}{\Pr(B)}$$
 ## What is the Bayesian approach?	
 
 * Schematically, if $A = \theta$ and $B = \text{data}$
-* The Bayes’ Theorem
+* The Bayes’ theorem
 
 $$\Pr(A \mid B) = \frac{\Pr(B \mid A) \; \Pr(A)}{\Pr(B)}$$
 
@@ -279,6 +292,13 @@ $${\color{red}{\Pr(\theta \mid \text{data})}} = \frac{\color{blue}{\Pr(\text{dat
 * \textcolor{green}{Prior distribution}: Represents what you know before seeing the data. The source of much discussion about the Bayesian approach.
 
 * $\color{orange}{\Pr(\text{data}) = \int L(\text{data} \mid \theta) \;\Pr(\theta) d\theta }$: Possibly high-dimensional integral, difficult if not impossible to calculate. This is one of the reasons why we need simulation (MCMC) methods - more soon.
+
+`r insert_slide_break()`
+
+```{r, echo=FALSE, fig.align='center'}
+knitr::include_graphics('img/frequentists_vs_bayesians_2x.png')
+```
+
 
 # Likelihood
 
@@ -621,6 +641,10 @@ Our model so far
 \end{align*}
 `r insert_html_math()`
 
+`r insert_slide_break()`
+
+![](img/bayes_puppies.png)
+
 # A detour to explore priors
 
 ## Prior $Beta(0.5,0.5)$ and posterior survival $Beta(19.5,38.5)$
@@ -667,6 +691,12 @@ points(x,dbeta(x, 20, 1),type='l',lwd=3)
 `r insert_inc_bullet()` In the absence of any prior information on one or more model parameters we wish to ensure that this lack of knowledge is properly reflected in the prior.
 
 `r insert_inc_bullet()` Always perform a sensitivity analysis. 
+
+`r insert_slide_break()`
+
+```{r, out.width = '11cm',out.height='7cm',fig.align='center',echo=FALSE}
+knitr::include_graphics('img/falling_man.jpg')    
+```
 
 ## How to incorporate prior information? 
 
@@ -987,6 +1017,21 @@ from = 0, to = 1), main='', xlab='survival')
 ```
 \endcol
 \endcols
+
+## Dynamic updating: _Today's posterior is tomorrow's prior_.
+
+If you obtain more data, no need to redo all of the analysis. Your posterior from the first analysis simply becomes your prior for the next analysis (and so on). 
+
+* Stage 0. Prior $p(\theta) \sim \text{Beta}(1,1)$.
+
+* Stage 1. Observe $y_1 = 22$ successes from $n_1 = 29$ trials.
+    * Likelihood is $p(y_1 | \theta) \sim \text{Binomial}(n_1=29,\theta)$.
+    * Posterior is $p(\theta | y_1) \sim \text{Beta}(23,8)$ with mean $23/31 = 0.74$.
+
+* Stage 2. Observe $y_2=5$ successed from $n_2=10$ new trials.
+    * Likelihood is $p(y_2 | \theta) \sim \text{Binomial}(n_2=10,\theta)$.
+    * Prior is $p(\theta) \sim \text{Beta}(23,8)$ from stage 1.
+    * Posterior is $p(\theta | y_1 \text{ and } y_2) \propto p(\theta | y_1) p(y_2 | \theta) = \text{Beta}(28,13)$ with mean $28/41 = 0.68$.
 
 # Get posteriors with Markov chains Monte Carlo (MCMC) methods
 
@@ -2409,8 +2454,6 @@ data.frame(model = c('no pooling', 'partial pooling', 'complete pooling'),
 
 ## Take-home messages about Bayesian statistics
 
-`r insert_pause()`
-
 * Frees the modeler in you (M. Kéry)
      + Uses probability to quantify uncertainty for everything (propagation of uncertainty).
      + Allows use of prior information ('better' estimates).
@@ -2448,3 +2491,149 @@ knitr::include_graphics('img/whytwitter.png')
 <!-- knitr::purl('BayesianStatistics_OGimenez.Rmd') -->
 <!-- ``` -->
 
+# Bonus
+
+## Longitudinal study on coral reef and GLMM (Poisson)
+
+> A survey of a coral reef uses 10 predefined linear transects covered by divers once every week. The response variable of interest is the abundance of a particular species of anemone as a function of water temperature. Counts of anemones are recorded at 20 regular line segments along the transect. The following piece of code will generate a data set with realistic properties according to the above design. Make sure you understand what it is doing. You might want to explain the script to the colleague next to you. Also, to try and make sense of the code of others, it is always good to plot and/or run small sections of the code. 
+
+From Jason Matthiopoulos' book. 
+
+`r insert_slide_break()`
+
+```{r}
+transects <- 10
+data <- NULL
+for (tr in 1:transects){
+  ref <- rnorm(1,0,.5) # random effect (intercept)
+  t <- runif(1, 18,22) + runif(1,-.2,0.2)*1:20 # water temperature gradient
+  ans <- exp(ref -14 + 1.8 * t - 0.045 * t^2) # Anemone gradient (expected response)
+  an <- rpois(20, ans) # actual counts on 20 segments of the current transect
+  data <- rbind(data,cbind(rep(tr, 20), t, an))
+}
+```
+
+`r insert_slide_break()`
+
+* Generate a data set using the anemone code and fit a GLMM with quadratic effect of temperature and a random intercept.
+
+* Fit the same model to the same data in a Frequentist framework using function `lme4::glmer()`. 
+
+* Compare the estimates.
+
+# Solution
+
+## Make sense of the code
+
+* Always difficult to make sense of the code of others. 
+
+* Good to plot and/or run small sections of the code. 
+
+`r insert_slide_break()`
+
+```{r}
+ref <- rnorm(1,0,.5) # random effect (intercept)
+t <- runif(1, 18,22) + runif(1,-.2,0.2)*1:20 # water temperature gradient
+plot(t,type='l')
+```
+
+`r insert_slide_break()`
+
+```{r}
+ans <- exp(ref -14 + 1.8 * t - 0.045 * t^2) # Anemone gradient (expected response)
+plot(t,log(ans),type='l')
+```
+
+`r insert_slide_break()`
+
+```{r}
+data <- data.frame(Transect=data[,1],Temperature=data[,2],Anemones=data[,3])
+plot(data$Temperature, data$Anemones)
+```
+
+## Write down model
+
+`r insert_html_math()`
+\begin{align*}
+   \text{Count}_i &\sim \text{Poisson(}\lambda_i) &\text{[likelihood]}\\
+  \text{log}(\lambda_i) &= a_{\text{TRANSECT[i]}} + b_1 \; \text{temp}_{i} + b_2 \; \text{temp}^2_{i} &\text{[linear model]} \\
+  a_j &\sim \text{Normal}(\bar{a}, \sigma) &\text{[prior for varying intercepts}] \\ 
+  \bar{a} &\sim \text{Normal}(0, 1000) &\text{[prior for population mean}] \\ 
+  \sigma &\sim \text{Uniform}(0, 100) &\text{[prior for standard deviation}] \\ 
+  b_1, b_2 &\sim \text{Normal}(0, 1000) &\text{[prior for slopes}] \\ 
+\end{align*}
+`r insert_html_math()`
+
+`r insert_slide_break()`
+
+Standardize Temperature covariate. 
+```{r}
+data$Temp <- (data$Temperature - mean(data$Temperature))/sd(data$Temperature)
+head(data)
+```
+
+`r insert_slide_break()`
+
+```{r}
+model <- 
+paste("
+model {
+  for (i in 1:n){
+    count[i] ~ dpois(lambda[i])
+    log(lambda[i]) <- a[transect[i]] + b[1] * x[i] + b[2] * pow(x[i],2)
+  }
+  for (j in 1:nbtransects){
+    a[j] ~ dnorm (mu.a, tau.a)
+  }
+  mu.a ~ dnorm (0, 0.001)
+  tau.a <- pow(sigma.a, -2)
+  sigma.a ~ dunif (0, 100)
+  b[1] ~ dnorm (0, 0.001)
+  b[2] ~ dnorm (0, 0.001)
+}
+")
+writeLines(model,"code/GLMMpoisson.bug")
+```
+
+`r insert_slide_break()`
+
+```{r}
+dat <- list(n = nrow(data), 
+            nbtransects = transects, 
+            x = data$Temp, 
+            count = data$Anemones, 
+            transect = data$Transect)
+init1 <- list(a=rnorm(transects), b=rnorm(2), mu.a=rnorm(1), sigma.a=runif(1))
+init2 <- list(a=rnorm(transects), b=rnorm(2), mu.a=rnorm(1), sigma.a=runif(1))
+inits <- list(init1,init2)
+par <- c ("a", "b", "mu.a", "sigma.a")
+```
+
+`r insert_slide_break()`
+
+```{r}
+fit <- jags(dat, inits, par, n.iter = 2500, model.file="code/GLMMpoisson.bug", n.chains = 2, n.burn = 1000)
+```
+
+`r insert_slide_break()`
+
+```{r}
+fit
+```
+
+
+`r insert_slide_break()`
+
+```{r}
+library(lme4)
+fit_lme4 <- glmer(Anemones ~ Temp + I(Temp^2) + (1 | Transect), data=data, family=poisson)
+fit_lme4
+```
+
+Parameter estimates obtained with both approaches are very similar.
+
+`r insert_slide_break()`
+
+```{r}
+visreg::visreg(fit_lme4,xvar='Temp')
+```
