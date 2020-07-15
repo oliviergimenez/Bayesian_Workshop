@@ -28,11 +28,11 @@
 ## To do list
 
 * Add a section on posterior predictive checks, to comply with the 3 steps of a Bayesian analysis as defined by Gelman.
-* Add a short section on sequential analysis (today prior is yesterday posterior).
+* ~~Add a short section on sequential analysis (today prior is yesterday posterior).~~
 * Write a short introduction to `Nimble` and provide both the `Jags` and `Nimble` codes. 
 * More on prior predictive checks.
 * All plots with `ggplot2`. Add short introduction to the `Tidyverse`.
-* Add an example with Poisson GLM(M) example.
+* ~~Add an example with Poisson GLM(M) example.~~
 * Add a section on models with varying slopes. Can we use the [LKJ prior](https://www.sciencedirect.com/science/article/pii/S0047259X09000876) in `Jags` and `Nimble`?
 * Add a section on population ecology (occupancy models, capture-recapture models). And/or something on hierarchical models, models with hidden variables. 
 * Add a section on [penalized splines](https://www.cambridge.org/core/books/semiparametric-regression/02FC9A9435232CA67532B4D31874412C) (possibly using package [`jagam`]) and [spatial analyses](https://r-nimble.org/html_manual/cha-spatial.html).
