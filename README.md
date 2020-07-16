@@ -35,7 +35,7 @@
 * ~~Add an example with Poisson GLM(M) example.~~
 * Add a section on models with varying slopes. Can we use the [LKJ prior](https://www.sciencedirect.com/science/article/pii/S0047259X09000876) in `Jags` and `Nimble`?
 * Add a section on population ecology (occupancy models, capture-recapture models). And/or something on hierarchical models, models with hidden variables. 
-* Add a section on [penalized splines](https://www.cambridge.org/core/books/semiparametric-regression/02FC9A9435232CA67532B4D31874412C) (possibly using package [`jagam`]) and [spatial analyses](https://r-nimble.org/html_manual/cha-spatial.html).
+* Add a section on [penalized splines](https://www.cambridge.org/core/books/semiparametric-regression/02FC9A9435232CA67532B4D31874412C) (possibly using package `jagam`) and [spatial analyses](https://r-nimble.org/html_manual/cha-spatial.html).
 * Say something about confidence, credible and HPD intervals.
 * Add another Metropolis example, with adaptation, with the beta-binomial example, and discuss several levels of acceptance. 
 * Add a section on LOO, and discuss complementarity with WAIC.
