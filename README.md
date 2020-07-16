@@ -1,14 +1,16 @@
 # Bayesian statistics 
 #### Olivier Gimenez, July 2020
 
+[![DOI](https://zenodo.org/badge/277529982.svg)](https://zenodo.org/badge/latestdoi/277529982)
+
 ## Slides codes and data
 
 * All material prepared in `R`.
 * `R Markdown` used to write reproducible material (`R` code also available).
 * Slides available on FigShare [here](https://doi.org/10.6084/m9.figshare.12656894.v2).
-* Material available via Github [there](https://github.com/oliviergimenez/Bayesian_Workshop).  
+* Material available via Github [there](https://github.com/oliviergimenez/Bayesian_Workshop).
 
-## Objectives
+## Learning objectives
 
 * Try and demystify Bayesian statistics, and what we call MCMC.
 * Make the difference between Bayesian and Frequentist analyses.
@@ -24,6 +26,25 @@
 5. Bayesian analyses in R with the Jags software.
 6. Contrast ecological hypotheses with model selection.
 7. Heterogeneity and multilevel models (aka mixed models).
+
+## How to use this repo?
+
+* Click on the `Code` green button at the top right of the page to create a copy of the repo within your own GitHub account (clone).
+* Alternately, click on the same green button and choose `Download ZIP` to download the repo to your computer.
+
+## Requirements
+
+* You need to have `R` or `RStudio` installed.
+* Download `Jags` from [sourceforge](http://sourceforge.net/projects/mcmc-jags/files/) and install it.
+- Install package `R2jags` from `R` or `RStudio`.
+
+## Problem
+
+If you spot a typo or an error, find a bug, or have trouble running the code, please [file an issue](https://github.com/oliviergimenez/Bayesian_Workshop/issues) or [get back to me](mailto:olivier.gimenez@cefe.cnrs.fr).  
+
+## Licence
+
+The material is made available under the [Creative Commons Attribution 4.0](https://creativecommons.org/licenses/by/4.0/) license.
 
 ## To do list
 
