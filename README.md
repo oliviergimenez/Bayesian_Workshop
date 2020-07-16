@@ -5,7 +5,7 @@
 
 * All material prepared in `R`.
 * `R Markdown` used to write reproducible material (`R` code also available).
-* Slides available on FigShare [here](https://doi.org/10.6084/m9.figshare.12656894.v1).
+* Slides available on FigShare [here](https://doi.org/10.6084/m9.figshare.12656894.v2).
 * Material available via Github [there](https://github.com/oliviergimenez/Bayesian_Workshop).  
 
 ## Objectives

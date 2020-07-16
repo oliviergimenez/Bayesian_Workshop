@@ -45,20 +45,20 @@ insert_html_math <- make_latex_decorator("", "$$")
 
 ## Credit where credit's due
 
-* Ruth King, Byron Morgan, Steve Brooks (our workshops and [_Bayesian analysis for population ecology_ book](https://www.maths.ed.ac.uk/~rking33/Book-website/index.html)).
+* Ruth King, Byron Morgan, Steve Brooks (our workshops and [\alert{Bayesian analysis for population ecology} book](https://www.maths.ed.ac.uk/~rking33/Book-website/index.html)).
 
-* Richard McElreath ([_Statistical rethinking_ book and lecture videos](https://github.com/rmcelreath/statrethinking_winter2019)).
+* Richard McElreath ([\alert{Statistical rethinking} book and lecture videos](https://github.com/rmcelreath/statrethinking_winter2019)).
 
-* Jim Albert and Jingchen Hu ([_Probability and Bayesian modelling_ book](https://bayesball.github.io/BOOK/probability-a-measurement-of-uncertainty.html)).
+* Jim Albert and Jingchen Hu ([\alert{Probability and Bayesian modelling} book](https://bayesball.github.io/BOOK/probability-a-measurement-of-uncertainty.html)).
 
-* Materials shared by [Tristan Marh](https://www.tjmahr.com/), [Jason Matthiopoulos](https://www.gla.ac.uk/researchinstitutes/bahcm/staff/jasonmatthiopoulos/), [Francisco Rodriguez Sanchez](https://frodriguezsanchez.net/), [Kerrie Mengersen](https://staff.qut.edu.au/staff/k.mengersen) and [Mark Lai](https://quantscience.rbind.io/).
+* Materials shared by [\alert{Tristan Marh}](https://www.tjmahr.com/), [\alert{Jason Matthiopoulos}](https://www.gla.ac.uk/researchinstitutes/bahcm/staff/jasonmatthiopoulos/), [\alert{Francisco Rodriguez Sanchez}](https://frodriguezsanchez.net/), [\alert{Kerrie Mengersen}](https://staff.qut.edu.au/staff/k.mengersen) and [\alert{Mark Lai}](https://quantscience.rbind.io/).
 
 ## Slides codes and data
 
 * All material prepared with `R`.
 * `R Markdown` used to write reproducible material.
-* Slides available on FigShare [https://doi.org/10.6084/m9.figshare.12656894.v1](https://doi.org/10.6084/m9.figshare.12656894.v1).
-* Material available via [https://github.com/oliviergimenez/Bayesian_Workshop](https://github.com/oliviergimenez/Bayesian_Workshop).
+* Slides available on FigShare [\alert{here}](https://doi.org/10.6084/m9.figshare.12656894.v1).
+* Material available on Github [\alert{there}](https://github.com/oliviergimenez/Bayesian_Workshop).
 
 ## Objectives
 
@@ -75,7 +75,7 @@ knitr::include_graphics('img/brace_yourself.jpeg')
 
 ## What is on our plate?
 
-1. Bayesian inference: Motivation and simple example. 
+1. Bayesian inference: Motivation and examples. 
 2. The likelihood. 
 3. A detour to explore priors.
 4. Markov chains Monte Carlo methods (MCMC).
@@ -83,7 +83,9 @@ knitr::include_graphics('img/brace_yourself.jpeg')
 6. Contrast ecological hypotheses with model selection. 
 7. Heterogeneity and multilevel models (aka mixed models).
 
-## I want moooooore
+# I want moooooore
+
+`r insert_slide_break()`
 
 ```{r, out.width = '13cm',out.height='7cm',fig.align='center',echo=FALSE}
 knitr::include_graphics('img/books.jpeg')
@@ -143,14 +145,14 @@ knitr::include_graphics('img/gelmanhill.png')
 
 `r insert_inc_bullet()` The chance of the  test being positive given you are a vampire is $\Pr(+|\text{vampire}) = 0.90$ (**sensitivity**).
 
-`r insert_inc_bullet()` The chance of a negative test given you are not a is $\Pr(-|\text{mortal}) = 0.95$ (**specificity**).
+`r insert_inc_bullet()` The chance of a negative test given you are mortal is $\Pr(-|\text{mortal}) = 0.95$ (**specificity**).
 
 
 ## What is the question?
 
 `r insert_inc_bullet()` From the perspective of the test: Given a person is a vampire, what is the probability that the test is positive? $\Pr(+|\text{vampire}) = 0.90$.
 
-`r insert_inc_bullet()` From the perspective of the person: Given that the test is positive, what is the probability that this person is a vampire? $\Pr(\text{vampire}|+) = \; ?$
+`r insert_inc_bullet()` From the perspective of a person: Given that the test is positive, what is the probability that this person is a vampire? $\Pr(\text{vampire}|+) = \; ?$
 
 `r insert_inc_bullet()` Assume that vampires are rare, and represent only $0.1\%$ of the population. This means that $\Pr(\text{vampire}) = 0.001$.
 
@@ -165,16 +167,24 @@ knitr::include_graphics('img/gelmanhill.png')
 
 \begincol
 
-- $\Pr(\text{vampire}|+) = \Pr(\text{vampire and } +) / \Pr(+)$
+- $\Pr(\text{vampire}|+) = \displaystyle{\frac{\Pr(\text{vampire and } +)}{\Pr(+)}}$
+
+`r insert_pause()`
 
 - $\Pr(\text{vampire and } +) = \Pr(\text{vampire}) \; \Pr(+ | \text{vampire}) = 0.0009$
 
+`r insert_pause()`
+
 - $\Pr(+) = 0.0009 + 0.04995 = 0.05085$
+
+`r insert_pause()`
 
 - $\Pr(\text{vampire}|+) = 0.0009/0.05085 = 0.02$
 
 \endcol
 \endcols
+
+`r insert_pause()`
 
 $$\Pr(\text{vampire}|+)= \displaystyle{\frac{ \Pr(+|\text{vampire}) \; \Pr(\text{vampire})}{\Pr(+)}}$$
 
@@ -239,7 +249,7 @@ $$ \Pr(\text{hypothesis} \mid \text{data}) = \frac{ \Pr(\text{data} \mid \text{h
 
 
 
-## What is doing research after all?
+## What is doing science after all?
 
 How plausible is some hypothesis given the data?
 
@@ -256,7 +266,7 @@ $$ \Pr(\text{hypothesis} \mid \text{data}) = \frac{ \Pr(\text{data} \mid \text{h
 
 `r insert_inc_bullet()` Typical stats problems involve estimating parameter $\theta$ with available data.
 
-`r insert_inc_bullet()` The frequentist approach (maximum likelihood estimation – MLE) assumes that the parameters are fixed, but have unknown values to be estimated.
+`r insert_inc_bullet()` The frequentist approach (**maximum likelihood estimation** – MLE) assumes that the parameters are fixed, but have unknown values to be estimated.
 
 `r insert_inc_bullet()` Classical estimates generally provide a point estimate of the parameter of interest.
 
@@ -264,18 +274,30 @@ $$ \Pr(\text{hypothesis} \mid \text{data}) = \frac{ \Pr(\text{data} \mid \text{h
 
 
 ## What is the Bayesian approach?	
+
 * The approach is based upon the idea that the experimenter begins with some prior beliefs about the system.
+
+`r insert_pause()`
+
 * And then updates these beliefs on the basis of observed data.
+
+`r insert_pause()`
+
 * This updating procedure is based upon the Bayes’ Theorem:
 
 $$\Pr(A \mid B) = \frac{\Pr(B \mid A) \; \Pr(A)}{\Pr(B)}$$
 
 ## What is the Bayesian approach?	
 
-* Schematically, if $A = \theta$ and $B = \text{data}$
-* The Bayes’ theorem
+* Schematically if $A = \theta$ and $B = \text{data}$, then
+
+`r insert_pause()`
+
+* The Bayes' theorem
 
 $$\Pr(A \mid B) = \frac{\Pr(B \mid A) \; \Pr(A)}{\Pr(B)}$$
+
+`r insert_pause()`
 
 * Translates into:
 
@@ -285,11 +307,19 @@ $$\Pr(\theta \mid \text{data}) = \frac{\Pr(\text{data} \mid \theta) \; \Pr(\thet
 
 $${\color{red}{\Pr(\theta \mid \text{data})}} = \frac{\color{blue}{\Pr(\text{data} \mid \theta)} \; \color{green}{\Pr(\theta)}}{\color{orange}{\Pr(\text{data})}}$$
 
+`r insert_pause()`
+
 * \textcolor{red}{Posterior distribution}: Represents what you know after having seen the data. The basis for inference, a distribution, possibly multivariate if more than one parameter ($\theta$). 
+
+`r insert_pause()`
 
 * \textcolor{blue}{Likelihood}: We know that guy from before, same as in the MLE approach.
 
+`r insert_pause()`
+
 * \textcolor{green}{Prior distribution}: Represents what you know before seeing the data. The source of much discussion about the Bayesian approach.
+
+`r insert_pause()`
 
 * $\color{orange}{\Pr(\text{data}) = \int L(\text{data} \mid \theta) \;\Pr(\theta) d\theta }$: Possibly high-dimensional integral, difficult if not impossible to calculate. This is one of the reasons why we need simulation (MCMC) methods - more soon.
 
@@ -304,9 +334,9 @@ knitr::include_graphics('img/frequentists_vs_bayesians_2x.png')
 
 ## Context
 
-`r insert_inc_bullet()` Usually, when talking about probability distributions, we assume that we know the parameter values
+`r insert_inc_bullet()` Usually, when talking about probability distributions, we assume that we know the parameter values.
 
-`r insert_inc_bullet()` In the real world, it is usually the other way around
+`r insert_inc_bullet()` In the real world, it is usually the other way around.
 
 ## A question of interest might be for example: 
 
@@ -316,9 +346,9 @@ getting a successful breeding attempt from this female? For the population?
 
 `r insert_slide_break()`
 
-* We don’t know what the probability of a birth is 
+* We don’t know what the probability of a birth is.
 
-* But we can see what the probability of getting our data would be for different values:
+* But we can calculate the probability of getting our data for different values:
 
 ```{r,collapse=TRUE}
 dbinom(x=3,size=10,prob=0.1)
@@ -326,7 +356,7 @@ dbinom(x=3,size=10,prob=0.1)
 
 `r insert_slide_break()`
 
-* We don’t know what the probability of a birth is 
+* We don’t know what the probability of a birth is. 
 
 * But we can see what the probability of getting our data would be for different values:
 
@@ -336,7 +366,7 @@ dbinom(x=3,size=10,prob=0.9)
 
 `r insert_slide_break()`
 
-* We don’t know what the probability of a birth is 
+* We don’t know what the probability of a birth is. 
 
 * But we can see what the probability of getting our data would be for different values:
 
@@ -352,13 +382,17 @@ dbinom(x=3,size=10,prob=0.9)
 dbinom(x=3,size=10,prob=0.25)
 ```
 
-So we would be more likely to observe 3 births if the probability is 0.25 than 0.1 or 0.9
+So we would be more likely to observe 3 births if the probability is 0.25 than 0.1 or 0.9.
 
 ## The likelihood
 
 * This reasoning is so common in statistics that it has a special name:
 
-* \alert{The likelihood} is the probability of observing the data under a certain model
+`r insert_pause()`
+
+* **The likelihood** is the probability of observing the data under a certain model.
+
+`r insert_pause()`
 
 * The data are known, we usually consider the likelihood as a function of the model parameters $\theta_1,\theta_2, \ldots, \theta_p$
 
@@ -366,7 +400,7 @@ $$L = P(\theta_1,\theta_2, \ldots, \theta_p \mid \text{data})$$
 
 ## Likelihood functions
 
-We may create a function to calculate a likelihood e.g.:
+We may create a function to calculate a likelihood:
 
 ```{r,collapse=TRUE}
 lik.fun <- function(parameter){
@@ -391,7 +425,7 @@ lik = rep(NA,length(p.grid))
 for (i in 1:length(p.grid)){
   lik[i] <- lik.fun(p.grid[i])
 }
-plot(p.grid,lik,xlab='prob. of getting a successful breeding attempt',ylab='likelihood',type='l',lwd=3,cex.lab=1.5)
+plot(p.grid,lik,xlab='Probability of getting a successful breeding',ylab='Likelihood',type='l',lwd=3,cex.lab=1.5)
 abline(v=0.3,lty=2,lwd=2,col='blue')
 ```
 
@@ -399,29 +433,31 @@ The *maximum* of the likelihood is at value $0.3$
 
 ## Maximum likelihood estimation
 
-* There is always a set of parameters that gives you the highest likelihood of observing the data: the \alert{Maximum Likelihood Estimates (MLEs)}
+* There is always a set of parameters that gives you the highest likelihood of observing the data, and this is the MLE.
+
+`r insert_pause()`
 
 * These can be calculated using:
 
-     + Trial and error (not efficient!)
-     + Compute the maximum of a function by hand (rarely doable in practice)
-     + An iterative optimization algorithm: `?optim` in `R`
+     + Trial and error (not efficient!).
+     + Compute the maximum of a function by hand (rarely doable in practice).
+     + An iterative optimization algorithm: `?optim` in `R`.
      
-## \alert{By hand}: compute MLE of $p$ from $Y \sim \text{Bin}(N=10,p)$ with $k=3$ successes
+## By hand: compute MLE of $p$ from $Y \sim \text{Bin}(N=10,p)$ with $k=3$ successes
 
-`r insert_inc_bullet()` $P(Y=k) = {{k}\choose{N}} p^k (1-p)^{N-k} = L(p)$
+`r insert_inc_bullet()` $P(Y=k) = {{k}\choose{N}} p^k (1-p)^{N-k} = L(p)$.
 
-`r insert_inc_bullet()` $\log(L(p)) = \text{cte} + k \log(p) + (N-k) \log(1-p)$
+`r insert_inc_bullet()` $\log(L(p)) = \text{cte} + k \log(p) + (N-k) \log(1-p)$.
 
-`r insert_inc_bullet()` We are searching for the maximum of $L$, or equivalently that of $\log(L)$
+`r insert_inc_bullet()` We are searching for the maximum of $L$, or equivalently that of $\log(L)$.
 
-`r insert_inc_bullet()` Compute derivate w.r.t. $p$: $\displaystyle{{{d\log(L)}\over{dp}} = {{k}\over{p}} - {{(N-k)}\over{(1-p)}}}$
+`r insert_inc_bullet()` Compute derivate w.r.t. $p$: $\displaystyle{{{d\log(L)}\over{dp}} = {{k}\over{p}} - {{(N-k)}\over{(1-p)}}}$.
 
-`r insert_inc_bullet()` Then solve $\displaystyle{{{d\log(L)}\over{dp}}=0}$; the MLE is $\displaystyle{\hat{p} = {{k}\over{N}}={{3}\over{10}}=0.3}$
+`r insert_inc_bullet()` Then solve $\displaystyle{{{d\log(L)}\over{dp}}=0}$; the MLE is $\displaystyle{\hat{p} = {{k}\over{N}}={{3}\over{10}}=0.3}$.
 
-`r insert_inc_bullet()` Here, the MLE is the proportion of observed successes
+`r insert_inc_bullet()` Here, the MLE is the proportion of observed successes.
 
-## \alert{Using a computer}: MLE of $p$ from $Y \sim \text{Bin}(N=10,p)$ with $k=3$ successes
+## Using a computer: MLE of $p$ from $Y \sim \text{Bin}(N=10,p)$ with $k=3$ successes
 
 ```{r,collapse=TRUE}
 lik.fun <- function(parameter) dbinom(x=3, size=10, prob=parameter)
@@ -431,7 +467,7 @@ optimize(lik.fun,c(0,1),maximum=TRUE)
 
 Use `optim` when the number of parameters is $> 1$.
 
-## \alert{Using a computer}: MLE of $p$ from $Y \sim \text{Bin}(N=10,p)$ with $k=3$ successes
+## Using a computer: MLE of $p$ from $Y \sim \text{Bin}(N=10,p)$ with $k=3$ successes
 
 ```{r, echo=FALSE}
 lik.fun <- function(parameter) dbinom(x=3, size=10, prob=parameter)
@@ -463,7 +499,7 @@ data.frame(height=height) %>%
 
 `r insert_slide_break()`
 
-* We assume a Normal distribution for the model. 
+* We consider a Normal distribution for the model. 
 
 * Compute the MLE of the parameters of the Normal distribution.
 
@@ -511,9 +547,9 @@ df
 # Back to Bayes
 
 ## A simple example
-* Let us take a simple example to fix ideas
-* 120 deer were radio-tracked over winter
-* 61 close to a plant, 59 far from any human activity
+* Let us take a simple example to fix ideas.
+* 120 deer were radio-tracked over winter.
+* 61 close to a plant, 59 far from any human activity.
 * Question: is there a treatment effect on survival?
 
 |            | Released   | Alive | Dead | Other |
@@ -535,9 +571,13 @@ df
 
 `r insert_slide_break()`
 
-* Our model is that we have a Binomial experiment (assuming independent and identically distributed draws from the population) 
+* Our model is that we have a Binomial experiment (assuming independent and identically distributed draws from the population).
 
-* $K$ the number of alive individuals at the end of the winter, so that $P(K=k) = \binom{n}{k}\theta^k(1-\theta)^{n-k}$
+`r insert_pause()`
+
+* $K$ the number of alive individuals at the end of the winter, so that $P(K=k) = \binom{n}{k}\theta^k(1-\theta)^{n-k}$.
+
+`r insert_pause()`
 
 * The classical approach is to maximise the corresponding likelihood with respect to $\theta$ to obtain the entirely plausible MLE:
 
@@ -549,7 +589,7 @@ $$ \hat{\theta} = k/n = 19/57$$.
 
 `r insert_inc_bullet()` Now, the one thing we know about $\theta$ is that is a continuous random variable and that it lies between zero and one.
 
-`r insert_inc_bullet()` Thus, a suitable prior distribution might be the Beta which is defined on this range $[0,1]$.
+`r insert_inc_bullet()` Thus, a suitable prior distribution might be the Beta defined on $[0,1]$.
 
 `r insert_inc_bullet()` What is the Beta distribution?
 
@@ -579,6 +619,8 @@ plot(x,dbeta(x, 0.8, 0.8),type='l',xlab='q',ylab='',main='beta(0.8,0.8)',lwd=3,c
 
 * We assume a priori that $\theta \sim Beta(a,b)$ so that $\Pr(\theta) = \theta^{a-1} (1 - \theta)^{b-1}$
 
+`r insert_pause()`
+
 * Then we have:
 
 $$
@@ -588,17 +630,21 @@ $$
 \end{aligned}
 $$
 
+`r insert_pause()`
+
 * That is: 
 
 $$ \theta \mid k \sim Beta(a+k,b+n-k)$$
+
+`r insert_pause()`
 
 * Take a Beta prior with a Binomial likelihood, you get a Beta posterior (conjugacy)
 
 ## Application to the deer example
 
-`r insert_inc_bullet()` Posterior distribution of survival is $\theta\mid k \sim Beta(a+k,b+n-k)$
+`r insert_inc_bullet()` Posterior distribution of survival is $\theta \sim Beta(a+k,b+n-k)$.
 
-`r insert_inc_bullet()` If we take a Uniform prior, i.e. $Beta(1,1)$, then we have 
+`r insert_inc_bullet()` If we take a Uniform prior, i.e. $Beta(1,1)$, then we have: 
 
 `r insert_inc_bullet()` $\theta_{treatment} \sim Beta(1+19,1+57-19)=Beta(20,39)$
 
@@ -608,7 +654,7 @@ $$ \theta \mid k \sim Beta(a+k,b+n-k)$$
 
 ## A general result
 
-\textcolor{red}{This is a general result, the Bayesian and frequentist estimates will always agree if there is sufficient data, so long as the likelihood is not explicitly ruled out by the prior}
+**This is a general result, the Bayesian and frequentist estimates will always agree if there is sufficient data, so long as the likelihood is not explicitly ruled out by the prior.**
 
 ## Prior $Beta(1,1)$ and posterior survival $Beta(20,39)$
 ```{r echo=FALSE}
@@ -646,6 +692,8 @@ Our model so far
 ![](img/bayes_puppies.png)
 
 # A detour to explore priors
+
+# Influence of the prior
 
 ## Prior $Beta(0.5,0.5)$ and posterior survival $Beta(19.5,38.5)$
 ```{r echo=FALSE}
@@ -698,17 +746,25 @@ points(x,dbeta(x, 20, 1),type='l',lwd=3)
 knitr::include_graphics('img/falling_man.jpg')    
 ```
 
-## How to incorporate prior information? 
+# How to incorporate prior information? 
 
-* Estimating survival using capture-recapture data
+## Estimating survival using capture-recapture data
 
-* E.g. 101 i.e. captured, missed and recaptured
+* A bird might captured, missed and recaptured; this is coded $101$.
 
-* Simplest model: constant survival $\phi$ and detection $p$ probabilities 
+`r insert_pause()`
+
+* Simplest model relies on constant survival $\phi$ and detection $p$ probabilities.
+
+`r insert_pause()`
+
+* Likelihood for that particular bird:
 
 $$\Pr(101) = \phi (1-p) \phi p $$
 
-* Assuming a vague prior 
+`r insert_pause()`
+
+* We assume a vague prior:
 
 $$\phi_{prior} \sim \text{Beta}(1,1) = \text{Uniform}(0,1)$$
 
@@ -727,7 +783,7 @@ $$\phi_{prior} \sim \text{Beta}(1,1) = \text{Uniform}(0,1)$$
 `r insert_html_math()`
 
 
-## Case study: European dippers in Eastern France (1981-1987)
+## European dippers in Eastern France (1981-1987)
 
 ```{r, out.width = '10cm',out.height='6cm',fig.align='center',echo=FALSE}
 knitr::include_graphics('img/dipper.png')    
@@ -735,29 +791,23 @@ knitr::include_graphics('img/dipper.png')
 
 ## How to incorporate prior information?
 
-`r insert_inc_bullet()` If no information, mean posterior survival is $\phi_{posterior} = 0.56$ with credible interval $[0.51,0.61]$
+`r insert_inc_bullet()` If no information, mean posterior survival is $\phi_{posterior} = 0.56$ with credible interval $[0.51,0.61]$.
 
-`r insert_inc_bullet()` Using information on body mass and annual survival of 27 European passerines, we can predict survival of European dippers using only body mass
+`r insert_inc_bullet()` Using information on body mass and annual survival of 27 European passerines, we can predict survival of European dippers using only body mass.
 
-`r insert_inc_bullet()` For dippers, body mass is 59.8g, therefore $\phi = 0.57$ with $\text{sd} = 0.073$
+`r insert_inc_bullet()` For dippers, body mass is 59.8g, therefore $\phi = 0.57$ with $\text{sd} = 0.073$.
 
-`r insert_inc_bullet()` Assuming an informative prior $\phi_{prior} \sim \text{Normal}(0.57,0.073^2)$
+`r insert_inc_bullet()` Assuming an informative prior $\phi_{prior} \sim \text{Normal}(0.57,0.073^2)$.
 
-`r insert_inc_bullet()` Mean posterior $\phi_{posterior} = 0.56$ with credible interval $[0.52, 0.60]$
+`r insert_inc_bullet()` Mean posterior $\phi_{posterior} = 0.56$ with credible interval $[0.52, 0.60]$.
 
-`r insert_inc_bullet()` No increase of precision in posterior inference 
+`r insert_inc_bullet()` No increase of precision in posterior inference.
 
 ## How to incorporate prior information?
 
-`r insert_inc_bullet()` Using information on body mass and annual survival of 27 European passerines, we can predict survival of European dippers using only body mass
+`r insert_inc_bullet()` Now if you had only the three first years of data, what would have happened?
 
-`r insert_inc_bullet()` For dippers, body mass is 59.8g, therefore $\phi = 0.57$ with $\text{sd} = 0.073$
-
-`r insert_inc_bullet()` Assuming an informative prior $\phi_{prior} \sim \text{Normal}(0.57,0.073^2)$ 
-
-`r insert_inc_bullet()` **With 3 first years only**
-
-`r insert_inc_bullet()` Width of credible interval is 0.47 (vague prior) vs. 0.30 (informative prior) 
+`r insert_inc_bullet()` Width of credible interval is 0.47 (vague prior) vs. 0.30 (informative prior).
 
 `r insert_inc_bullet()` Huge increase of precision in posterior inference ($40\%$ gain)!
 
@@ -913,9 +963,13 @@ lines(density(res[,'surv']),xlab='survival',ylab='probability density',col='blue
 legend('topleft',lwd=2,legend=c('with prior info','without prior info'),col=c('red','blue'))
 ```
 
-## Prior elicitation via moment matching
+# Prior elicitation via moment matching
+
+## Remember the Beta distribution
 
 * Recall that the Beta distribution is a continuous distribution with values between 0 and 1. Useful for modelling survival or detection probabilities. 
+
+`r insert_pause()`
 
 * If $X \sim Beta(\alpha,\beta)$, then the first and second moments of $X$ are:
 
@@ -923,13 +977,19 @@ $$\mu = \text{E}(X) = \frac{\alpha}{\alpha + \beta}$$
 
 $$\sigma^2 = \text{Var}(X) = \frac{\alpha\beta}{(\alpha + \beta)^2 (\alpha + \beta + 1)}$$
 
-## Prior elicitation via moment matching
+## Moment matching
 
-* In the capture-recapture example, we know **a priori** that the mean of the probability we're interested in is $\mu = 0.57$ and its variance is $\sigma^2 = 0.073^2$? 
+* In the capture-recapture example, we know a priori that the mean of the probability we're interested in is $\mu = 0.57$ and its variance is $\sigma^2 = 0.073^2$? 
 
-* Parameters $\mu$ and $\sigma^2$ are seen as the moments of a $Beta(\alpha,\beta)$ distribution
+`r insert_pause()`
 
-* Now we look for values of $\alpha$ and $\beta$ that match the observed moments of the Beta distribution ($\mu$ and $\sigma^2$) 
+* Parameters $\mu$ and $\sigma^2$ are seen as the moments of a $Beta(\alpha,\beta)$ distribution.
+
+`r insert_pause()`
+
+* Now we look for values of $\alpha$ and $\beta$ that match the observed moments of the Beta distribution ($\mu$ and $\sigma^2$).
+
+`r insert_pause()`
 
 * We need another set of equations:
 
@@ -939,14 +999,16 @@ $$\beta = \alpha \bigg(\frac{1}{\mu}-1\bigg)$$
 
 `r insert_slide_break()`
 
-For our model, that means:
+* For our model, that means:
 
 ```{r echo = TRUE}
 (alpha <- ( (1 - 0.57)/(0.073*0.073) - (1/0.57) )*0.57^2)
 (beta <- alpha * ( (1/0.57) - 1))
 ```
 
-Now use $\phi_{prior} \sim \text{Beta}(\alpha,\beta)$ instead of $\phi_{prior} \sim \text{Normal}(0.57,0.073^2)$
+`r insert_pause()`
+
+* Now use $\phi_{prior} \sim \text{Beta}(\alpha = 25.6,\beta = 19.3)$ instead of $\phi_{prior} \sim \text{Normal}(0.57,0.073^2)$
 
 # Your turn 
 
@@ -968,7 +1030,9 @@ samp <- rbeta(n, alpha, beta)
 ```
 
 
-## Prior predictive checks: linear regression
+# Prior predictive checks
+
+## Linear regression
 
 \begincols
 \begincol
@@ -992,7 +1056,7 @@ plot(density(rnorm(1000, 2, 0.5)),
 \endcol
 \endcols
 
-## Prior predictive checks: logistic regression
+## Logistic regression
 
 \begincols
 \begincol
@@ -1018,15 +1082,23 @@ from = 0, to = 1), main='', xlab='survival')
 \endcol
 \endcols
 
-## Dynamic updating: _Today's posterior is tomorrow's prior_.
+# Dynamic updating
+
+## Today's posterior is tomorrow's prior
 
 If you obtain more data, no need to redo all of the analysis. Your posterior from the first analysis simply becomes your prior for the next analysis (and so on). 
 
+`r insert_pause()`
+
 * Stage 0. Prior $p(\theta) \sim \text{Beta}(1,1)$.
+
+`r insert_pause()`
 
 * Stage 1. Observe $y_1 = 22$ successes from $n_1 = 29$ trials.
     * Likelihood is $p(y_1 | \theta) \sim \text{Binomial}(n_1=29,\theta)$.
     * Posterior is $p(\theta | y_1) \sim \text{Beta}(23,8)$ with mean $23/31 = 0.74$.
+
+`r insert_pause()`
 
 * Stage 2. Observe $y_2=5$ successed from $n_2=10$ new trials.
     * Likelihood is $p(y_2 | \theta) \sim \text{Binomial}(n_2=10,\theta)$.
@@ -1037,11 +1109,17 @@ If you obtain more data, no need to redo all of the analysis. Your posterior fro
 
 ## Back to the Bayes' theorem	
 
-* Bayes inference is easy! Well, not so easy in real-life applications...
+* Bayes inference is easy! Well, not so easy in real-life applications.
+
+`r insert_pause()`
 
 * The issue is in ${\Pr(\theta \mid \text{data})} = \displaystyle{\frac{{\Pr(\text{data} \mid \theta)} \; {\Pr(\theta)}}{\color{orange}{\Pr(\text{data})}}}$
 
+`r insert_pause()`
+
 * $\color{orange}{\Pr(\text{data}) = \int{L(\text{data} \mid \theta)\Pr(\theta) d\theta}}$ is a $N$-dimensional integral if $\theta = \theta_1, \ldots, \theta_N$ 
+
+`r insert_pause()`
 
 * Difficult, if not impossible to calculate! 
 
@@ -1107,25 +1185,39 @@ lines(p, dbeta(p,a,b), col='darkblue', lwd=3)
 
 ## What if multiple parameters, like in a simple linear regression?
 
+* Example of a linear regression with parameters $\alpha$, $\beta$ and $\sigma$ to be estimated. 
+
+`r insert_pause()`
+
 * Bayes' theorem says:
 
 $$ P(\alpha, \beta, \sigma \mid \text{data}) = \frac{ P(\text{data} \mid \alpha, \beta, \sigma) \, P(\alpha, \beta, \sigma)}{\iiint \, P(\text{data} \mid \alpha, \beta, \sigma) \, P(\alpha, \beta, \sigma) \,d\alpha \,d\beta \,d\sigma} $$
+
+`r insert_pause()`
 
 * Do we really wish to calculate a 3D integral?
 
 ## Bayesian computation
 
-* In the early 1990s, statisticians rediscovered work from the 1950's in physics
+* In the early 1990s, statisticians rediscovered work from the 1950's in physics.
 
 ```{r, out.width = '9cm',out.height='3cm',fig.align='center',echo=FALSE}
 knitr::include_graphics('img/metropolis.png')   
 ```
 
-* Use stochastic simulation to draw samples from posterior distributions
+`r insert_pause()`
 
-* Avoid explicit calculation of integrals in Bayes formula
+* Use stochastic simulation to draw samples from posterior distributions.
 
-* Instead, approximate posterior to arbitrary degree of precision by drawing large sample
+`r insert_pause()`
+
+* Avoid explicit calculation of integrals in Bayes formula.
+
+`r insert_pause()`
+
+* Instead, approximate posterior to arbitrary degree of precision by drawing large sample.
+
+`r insert_pause()`
 
 * Markov chain Monte Carlo = MCMC; boost to Bayesian statistics!
 
@@ -1137,21 +1229,21 @@ knitr::include_graphics('img/maniac.png')
 
 ## Why are MCMC methods so useful?
 
-* MCMC: stochastic algorithm to produce sequence of dependent random numbers (from Markov chain).
+`r insert_inc_bullet()` MCMC: stochastic algorithm to produce sequence of dependent random numbers (from Markov chain).
 
-* Converge to equilibrium (aka stationary) distribution.
+`r insert_inc_bullet()` Converge to equilibrium (aka stationary) distribution.
 
-* Equilibrium distribution is the desired posterior distribution!
+`r insert_inc_bullet()` Equilibrium distribution is the desired posterior distribution!
 
-* Several ways of constructing these chains: e.g., Metropolis-Hastings, Gibbs sampler, Metropolis-within-Gibbs.
+`r insert_inc_bullet()` Several ways of constructing these chains: e.g., Metropolis-Hastings, Gibbs sampler, Metropolis-within-Gibbs.
 
-* How to implement them in practice?!
+`r insert_inc_bullet()` How to implement them in practice?!
 
 ## The Metropolis algorithm
 
-* We illustrate sampling from a discrete distribution. Suppose we define a discrete probability distribution on the integers $1, \ldots, K$.
+`r insert_inc_bullet()` We illustrate sampling from a discrete distribution. Suppose we define a discrete probability distribution on the integers $1, \ldots, K$.
 
-* We write a short function `pd()` in `R` taking on the values $1, \ldots, 8$ with probabilities proportional to the values 5, 10, 4, 4, 20, 20, 12, and 5.
+`r insert_inc_bullet()` We write a short function `pd()` in `R` taking on the values $1, \ldots, 8$ with probabilities proportional to the values 5, 10, 4, 4, 20, 20, 12, and 5.
 
 `r insert_slide_break()`
 
@@ -1177,10 +1269,24 @@ prob_dist %>%
 
 To simulate from this probability distribution, we take a **random walk** described as follows.
 
+`r insert_pause()`
+
 1. We start at any possible location of our random variable from 1 to $K = 8$
+
+`r insert_pause()`
+
 2. To decide where to visit next, a fair coin is flipped. If the coin lands heads, we think about visiting the location one value to the left, and if coin lands tails, we consider visiting the location one value to right. We call this location the **candidate** location.
+
+`r insert_pause()`
+
 3. We compute the ratio of the probabilities at the candidate and current locations $R = pd(candidate)/pd(current)$
+
+`r insert_pause()`
+
 4. We spin a continuous spinner that lands anywhere from 0 to 1 – call the random spin $X$. If $X$ is smaller than $R$, we move to the candidate location, and otherwise we remain at the current location.
+
+`r insert_pause()`
+
 5. We repeat 2-4 a number of times called **steps** (many steps).
 
 `r insert_slide_break()`
@@ -1229,11 +1335,11 @@ bind_rows(sim,truth) %>%
 
 ## Animating the Metropolis algorithm - 2D example
 
-https://mbjoseph.github.io/posts/2018-12-25-animating-the-metropolis-algorithm/
+[\alert{https://mbjoseph.github.io/posts/2018-12-25-animating-the-metropolis-algorithm/}](https://mbjoseph.github.io/posts/2018-12-25-animating-the-metropolis-algorithm/)
 
 ## The Markov-chain Monte Carlo Interactive Gallery
 
-https://chi-feng.github.io/mcmc-demo/
+[\alert{https://chi-feng.github.io/mcmc-demo/}](https://chi-feng.github.io/mcmc-demo/)
 
 # Bayes in practice
 
@@ -1243,6 +1349,8 @@ Oldies but goodies:
 
 * WinBUGS, OpenBUGS: Where it all began.
 * Jags: What we will use in this course. 
+
+`r insert_pause()`
 
 The new kids on the block:
 
@@ -1441,9 +1549,13 @@ storks
 
 * To implement a MCMC algorithm, we often need to specify a proposal distribution from which we generate candidate value then accept/reject.
 
+`r insert_pause()`
+
 * This typically involves
     * specifying a given distribution family (e.g. normal, uniform), and then, 
     * setting the parameters of the given distribution.
+
+`r insert_pause()`
 
 * Although the exact distribution specified is essentially arbitrary – it will have a significant effect on the performance of the MCMC algorithm.
 
@@ -1461,9 +1573,7 @@ storks
 
 ## Good/Bad Traces
 
-```{r, echo=FALSE}
-knitr::include_graphics('img/acceptance.png')   
-```
+![](img/acceptance.png)
 
 ## Autocorrelation functions
 
@@ -1520,14 +1630,22 @@ knitr::include_graphics('img/mcmc.png')
 
 * How long of a chain is needed to produce stable estimates ?
 
+`r insert_pause()`
+
 * Most MCMC chains are strongly autocorrelated.
 
+`r insert_pause()`
+
 * Successive steps are near each other, and are not independent. 
+
+`r insert_pause()`
 
 * The effective sample size (`n.eff`) measures chain length while taking into account the autocorrelation of the chain.
     * `n.eff` is less than the number of MCMC iterations.
     * Check the `n.eff` of every parameter of interest.
     * Check the `n.eff` of any interesting parameter combinations.
+
+`r insert_pause()`
 
 * We need $\text{n.eff} \geq 100$ independent steps. 
 
@@ -1563,19 +1681,27 @@ storks
 
 * Increase burn-in, sample more.
 
+`r insert_pause()`
+
 *	Use more informative priors.
 
 * Pick better initial values (good guess).
+
+`r insert_pause()`
 
 * Reparameterize: 
      + Standardize covariates.
      + Non-centering: $\alpha \sim N(0,\sigma)$ becomes $\alpha = z \sigma$ with $z \sim N(0,1)$.
 
+`r insert_pause()`
+
 *	Something wrong with your model? 
      + Start with a simpler model (remove complexities). 
      + Use simulations. 
 
-* Change sampler. Upgrade to Nimble or Stan.
+`r insert_pause()`
+
+* Change your sampler. Upgrade to Nimble or Stan.
 
 
 
@@ -1637,7 +1763,7 @@ head(stupid_pd)
 
 `r insert_slide_break()`
 
-* Plot de distribution
+* Plot the distribution
 ```{r}
 plot(density(stupid_pd), xlab = '', main = '', lwd = 3)
 ```
@@ -1651,7 +1777,7 @@ plot(density(stupid_pd), xlab = '', main = '', lwd = 3)
 
 `r insert_inc_bullet()` The proportion of explained variance $R^2$ is problematic, because the more variables you have, the bigger $R^2$ is.
 
-`r insert_inc_bullet()` Idea: \alert{penalize models with too many parameters}.
+`r insert_inc_bullet()` Idea: **penalize models with too many parameters**.
 
 ## Akaike information criterion (AIC)
 
@@ -1661,23 +1787,23 @@ with $L$ the likelihood and $K$ the number of parameters $\theta_i$.
 
 ## Akaike information criterion (AIC)
 
-$$AIC = {\color{red}{- 2 \log(L(\hat{\theta}_1,\ldots,\hat{\theta}_K))}} + 2 K$$
+$$\text{AIC} = {\color{red}{- 2 \log(L(\hat{\theta}_1,\ldots,\hat{\theta}_K))}} + 2 K$$
 
 \textcolor{red}{A measure of goodness-of-fit of the model to the data}: the more parameters you have, the smaller the deviance is (or the bigger the likelihood is).
 
 ## Akaike information criterion (AIC)
 
-$$AIC = - 2 \log(L(\hat{\theta}_1,\ldots,\hat{\theta}_K)) + {\color{red}{2 K}}$$
+$$\text{AIC} = - 2 \log(L(\hat{\theta}_1,\ldots,\hat{\theta}_K)) + {\color{red}{2 K}}$$
 
 \textcolor{red}{A penalty}: twice the number of parameters $K$
 
 ## Akaike information criterion (AIC)
 
-`r insert_inc_bullet()` $AIC$ makes the balance between *quality of fit* and *complexity* of a model.
+`r insert_inc_bullet()` AIC makes the balance between *quality of fit* and *complexity* of a model.
 
-`r insert_inc_bullet()` Best model is the one with lowest $AIC$ value.
+`r insert_inc_bullet()` Best model is the one with lowest AIC value.
 
-`r insert_inc_bullet()` Two models are difficult to distinguish if $\Delta AIC < 2$.
+`r insert_inc_bullet()` Two models are difficult to distinguish if $\Delta \text{AIC} < 2$.
 
 ## Bayesian version
 
@@ -1937,13 +2063,13 @@ Model with rainfall only seems to be better supported by the data. In case model
 
 ## What are multilevel models?
 
-`r insert_inc_bullet()` \alert{Multilevel models} include both fixed and random effects
+`r insert_inc_bullet()` Multilevel models include both fixed and random effects.
 
-`r insert_inc_bullet()` Random effects are statistical parameters that attempt to \alert{explain noise caused by clusters} of the population you are trying to model
+`r insert_inc_bullet()` Random effects are statistical parameters that attempt to **explain noise caused by clusters** of the population you are trying to model.
 
-`r insert_inc_bullet()` A multilevel model assumes that the dataset being analysed consists of \alert{a hierarchy of different populations} whose differences relate to that hierarchy
+`r insert_inc_bullet()` A multilevel model assumes that the dataset being analysed consists of **a hierarchy of different populations** whose differences relate to that hierarchy.
 
-`r insert_inc_bullet()` Measurement that come \alert{in clusters} or groups
+`r insert_inc_bullet()` Measurement that come **in clusters** or groups.
 
 # Your turn
 
@@ -1984,7 +2110,7 @@ Model with rainfall only seems to be better supported by the data. In case model
 
 `r insert_inc_bullet()` No information passed among clusters.
 
-`r insert_inc_bullet()` Multilevel models remember and pool information, they have memory.
+`r insert_inc_bullet()` Multilevel models remember and pool information. They have memory.
 
 `r insert_inc_bullet()` Properties of clusters come from a population.
 
@@ -2041,7 +2167,7 @@ xyplot(log(nb_grain) ~ Biomass | Species,data=dat,xlab='Biomass',ylab='Number of
 \end{align*}
 `r insert_html_math()`
 
-\alert{Model with complete pooling. All clusters the same.}
+**Model with complete pooling. All clusters the same.**
 
 ## GLM with no pooling
 
@@ -2054,9 +2180,9 @@ xyplot(log(nb_grain) ~ Biomass | Species,data=dat,xlab='Biomass',ylab='Number of
 \end{align*}
 `r insert_html_math()`
 
-\alert{Model with no pooling. All clusters unrelated (fixed effect).}
+**Model with no pooling. All clusters unrelated (fixed effect).**
 
-## GL\alert{M}M of GLM with partial pooling
+## GL**M**M or GLM with partial pooling
 
 `r insert_html_math()`
 \begin{align*}
@@ -2069,7 +2195,7 @@ xyplot(log(nb_grain) ~ Biomass | Species,data=dat,xlab='Biomass',ylab='Number of
 \end{align*}
 `r insert_html_math()`
 
-\alert{Model with partial pooling. Clusters are somehow related (random effect).}
+**Model with partial pooling. Clusters are somehow related (random effect).**
 
 # Back to the plant example
 
@@ -2387,14 +2513,14 @@ xyplot(y ~ x | Sp, panel=panelfun3,
 
 ## Multilevel models in a nutshell
 
-`r insert_inc_bullet()` \alert{Shrinkage via pooling is desirable}. The no-pooling model overstates variation among clusters and makes the
+`r insert_inc_bullet()` **Shrinkage via pooling is desirable**. The no-pooling model overstates variation among clusters and makes the
 individual clusters look more different than they are (overfitting). The complete-pooling model simply ignores the variation among clusters (underfitting).
 
-`r insert_inc_bullet()` We can \alert{generalize to a wider population}. Is there an allometry relationship between number of seeds and biomass?
+`r insert_inc_bullet()` We can **generalize to a wider population**. Is there an allometry relationship between number of seeds and biomass?
 
-`r insert_inc_bullet()` We may consider \alert{varying slopes}. We'd need to deal with correlations between intercept and slope random effects. Open a whole new world with spatial (or time) autocorrelation, phylogenetic regressions, quantitative genetics, network models.
+`r insert_inc_bullet()` We may consider **varying slopes**. We'd need to deal with correlations between intercept and slope random effects. Open a whole new world with spatial (or time) autocorrelation, phylogenetic regressions, quantitative genetics, network models.
 
-`r insert_inc_bullet()` We may \alert{include predictors at the cluster level}. Imagine we know something about functional traits, and wish to determine whether some species-to-species variation in the allometry relationship is explained by these traits. 
+`r insert_inc_bullet()` We may **include predictors at the cluster level**. Imagine we know something about functional traits, and wish to determine whether some species-to-species variation in the allometry relationship is explained by these traits. 
 
 # Your turn
 
@@ -2465,7 +2591,7 @@ data.frame(model = c('no pooling', 'partial pooling', 'complete pooling'),
   + Checking convergence is painful.
   + Specifying priors might be tricky.
   + Model adequacy should be checked (posterior predictive checks - not covered).
-  + Computational burden can be high (see function `R2jags::jags.parallel()` and package [`jagsUI`](https://github.com/kenkellner/jagsui).
+  + Computational burden can be high (see function `R2jags::jags.parallel()` and package [\alert{`jagsUI`}](https://github.com/kenkellner/jagsui).
 
 `r insert_pause()`
 
@@ -2480,16 +2606,11 @@ data.frame(model = c('no pooling', 'partial pooling', 'complete pooling'),
 knitr::include_graphics('img/bayesian_evol.png')    
 ```
 
-## [Why become a bayesian? Ask twitter!](https://twitter.com/ChelseaParlett/status/1282798645453000704)
+## [\alert{Why become a bayesian? Ask twitter!}](https://twitter.com/ChelseaParlett/status/1282798645453000704)
 
 ```{r, fig.align='center', echo=FALSE}
 knitr::include_graphics('img/whytwitter.png')    
 ```
-
-<!-- # Generate R code only -->
-<!-- ```{r} -->
-<!-- knitr::purl('BayesianStatistics_OGimenez.Rmd') -->
-<!-- ``` -->
 
 # Bonus
 
@@ -2637,3 +2758,9 @@ Parameter estimates obtained with both approaches are very similar.
 ```{r}
 visreg::visreg(fit_lme4,xvar='Temp')
 ```
+
+<!-- # Generate R code only -->
+<!-- ```{r} -->
+<!-- knitr::purl('BayesianStatistics_OGimenez.Rmd') -->
+<!-- ``` -->
+
