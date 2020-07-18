@@ -27,6 +27,11 @@
 6. Contrast ecological hypotheses with model selection.
 7. Heterogeneity and multilevel models (aka mixed models).
 
+## Credits
+
+* Many slides are from [a workshop we used to run a loooong time ago](https://www.maths.ed.ac.uk/~rking33/Book-website/index.html) with Ruth King, Byron Morgan and Steve Brooks. I also re-used or adapted slides by [Richard McElreath](https://github.com/rmcelreath/statrethinking_winter2019) (16-20, 90-91, 166, 186), [Kerrie Mengersen](https://staff.qut.edu.au/staff/k.mengersen) (16-20, 81), [Francisco Rodriguez Sanchez](https://frodriguezsanchez.net/) (79-80; from the Stan manual), [Jim Albert and Jingchen Hu](https://bayesball.github.io/BOOK/probability-a-measurement-of-uncertainty.html) (93-99), [Tristan Marh](https://www.tjmahr.com/) (22), [Jason Matthiopoulos](https://www.gla.ac.uk/researchinstitutes/bahcm/staff/jasonmatthiopoulos/) (31-39, 196), a paper by [Michael McCarthy and Pip Masters](https://besjournals.onlinelibrary.wiley.com/doi/full/10.1111/j.1365-2664.2005.01101.x) (71-73), [Andrés Lopez-Sepulcre](https://www.lopez-sepulcre.com/) (126) and [John Kruschke' book cover](https://sites.google.com/site/doingbayesiandataanalysis/) (61). 
+* The sources for the images are: [James Kulich](https://www.elmhurst.edu/blog/thomas-bayes/) for slide 13, Matt Buck for slide 21, [xkcd](https://xkcd.com/1132/) for slide 29 and Mike West for slide 194.  
+
 ## How to use this repo?
 
 * Click on the `Code` green button at the top right of the page to create a copy of the repo within your own GitHub account (clone).
