@@ -20,7 +20,7 @@
 4. :uk: Markov chains Monte Carlo methods (MCMC) (video starts [here](https://youtu.be/Aj3-LR9zcDs?t=281)) :fr: Les méthodes de Monte Carlo par chaînes de Markov (MCMC) (la vidéo commence [ici](https://youtu.be/Aj3-LR9zcDs?t=281))
 5. :uk: Bayesian analyses in R with the Jags software (video starts [here](https://youtu.be/Aj3-LR9zcDs?t=3055) and goes on [there](https://youtu.be/gprytbDxcD8?t=1)) :fr: Analyses bayésiennes avec R et le logiciel Jags (la vidéo commence [ici](https://youtu.be/Aj3-LR9zcDs?t=3055) et continue [là](https://youtu.be/gprytbDxcD8?t=1))
 6. :uk: Contrast scientific hypotheses with model selection (WAIC) (video starts [here](https://youtu.be/gprytbDxcD8?t=2068)) :fr: Contraster des hypothèses scientifiques avec la sélection de modèles (WAIC) (la vidéo commence [ici](https://youtu.be/gprytbDxcD8?t=2068))
-7. :uk: Heterogeneity and multilevel models (aka mixed models) (video starts [here](https://youtu.be/gprytbDxcD8?t=3128) and goes on [there]()) :fr: Hétérogénéité et modèles multiniveaux ou mixtes (la vidéo commence [ici](https://youtu.be/gprytbDxcD8?t=3128) et continue [là]()) 
+7. :uk: Heterogeneity and multilevel models (aka mixed models) (video starts [here](https://youtu.be/gprytbDxcD8?t=3128) and goes on [there](https://youtu.be/EaxQGJVJmIw?t=1)) :fr: Hétérogénéité et modèles multiniveaux ou mixtes (la vidéo commence [ici](https://youtu.be/gprytbDxcD8?t=3128) et continue [là](https://youtu.be/EaxQGJVJmIw?t=1)) 
 
 ### Slides, videos, code and data / Diapos, vidéos, code et données
 
@@ -29,7 +29,7 @@
    + slides 1-80, watch [here](https://youtu.be/ncOCz-HTZS4?t=1) / diapos 1-80, regardez [ici](https://youtu.be/ncOCz-HTZS4?t=1)
    + slides 81-131, watch [here](https://youtu.be/Aj3-LR9zcDs?t=1) / diapos 81-131, regardez [ici](https://youtu.be/Aj3-LR9zcDs?t=1)
    + slides 132-171, watch [here](https://youtu.be/gprytbDxcD8?t=1) / diapos 132-171, regardez [ici](https://youtu.be/gprytbDxcD8?t=1) 
-   + slides 172-end, watch [here]() / diapos 172-fin, regardez [ici]() 
+   + slides 172-end, watch [here](https://youtu.be/EaxQGJVJmIw?t=1) / diapos 172-fin, regardez [ici](https://youtu.be/EaxQGJVJmIw?t=1) 
 * :uk: All material prepared in `R` / Matériel préparé avec `R`
    + `R` code available [here](https://raw.githubusercontent.com/oliviergimenez/Bayesian_Workshop/master/BayesianStatistics_OGimenez.R) / code `R` disponible  [ici](https://raw.githubusercontent.com/oliviergimenez/Bayesian_Workshop/master/BayesianStatistics_OGimenez.R)
    + `R Markdown` used to write reproducible material (source code [here](https://raw.githubusercontent.com/oliviergimenez/Bayesian_Workshop/master/BayesianStatistics_OGimenez.Rmd)) :fr: `R Markdown` utilisé pour écrire les diapos (code [ici](https://raw.githubusercontent.com/oliviergimenez/Bayesian_Workshop/master/BayesianStatistics_OGimenez.Rmd)).
@@ -67,7 +67,7 @@
    + Mention that besides `Jags`, `Stan` and `Nimble`, there are other software options to fit models in the Bayesian framework that do not need coding. Check out the [CRAN Task View: Bayesian Inference](https://cran.r-project.org/web/views/Bayesian.html).
    + Mention the availability of free Bayesian books: [here](https://www.bookdown.org/home/tags/bayesian/) and Gelman BDA [there](http://www.stat.columbia.edu/~gelman/book/).  
    + Add a plot with several lines from posterior distribution of regression parameters to a plot of mean response function of a covariate; then get the credible interval on the prediction. 
-   + R 4.0 no longer converts automatically chains of characters in factors when reading file; this causes a problem in the plant example on GLMM, add an extra step for factor conversion.
+   + R 4.0 no longer converts automatically chains of characters in factors when reading file; while it is a good thing, this causes a problem in the plant example on GLMM with older R versions; just need to add an extra step for converting the Sp column into a factor (Sp <- as.factor(Sp)).
    + Say more on prior predictive checks. 
    + Say something about confidence, credible and HPD intervals.
    + Add another Metropolis example, with adaptation, with the beta-binomial example, and discuss several levels of acceptance. 
@@ -75,12 +75,16 @@
    + Do all plots with `ggplot2`; add [short introduction to the `Tidyverse`](https://github.com/oliviergimenez/intro_tidyverse).
    + ~~Add a short section on sequential analysis (today prior is yesterday posterior).~~
    + ~~Add an example with Poisson GLM(M) example.~~
+   + In the GLMM section with the plant example, decide to go for number of seeds or log(number of seeds)
+   + Explain the WAIC in more details
+   + Properly introduce GLMs
+
 
 * Mid term   
 
    + Add a section on LOO, and discuss complementarity with WAIC.
    + Add a section on models with varying slopes. Can we use the [LKJ prior](https://www.sciencedirect.com/science/article/pii/S0047259X09000876) in `Jags` and `Nimble` ?
-   + Write a short introduction to `Nimble` (resp. `Stan`) and provide both the `Jags` and `Nimble` (resp. `Stan`) codes. Translating `Jags` code in `Nimble` is [easy](https://r-nimble.org/quick-guide-for-converting-from-jags-or-bugs-to-nimble). For now, check out [training materials](https://github.com/nimble-training) and [examples](https://r-nimble.org/examples). Do 
+   + Write a short introduction to `Nimble` (resp. `Stan`) and provide both the `Jags` and `Nimble` (resp. `Stan`) codes. Translating `Jags` code in `Nimble` is [easy](https://r-nimble.org/quick-guide-for-converting-from-jags-or-bugs-to-nimble). For now, check out [training materials](https://github.com/nimble-training) and [examples](https://r-nimble.org/examples).
    + Add a section on population ecology (occupancy models, capture-recapture models). And/or something on hierarchical models, models with hidden variables. Make use of [nimbleEcology](https://cran.r-project.org/web/packages/nimbleEcology/vignettes/Introduction_to_nimbleEcology.html).
    + Add a section on [penalized splines](https://www.cambridge.org/core/books/semiparametric-regression/02FC9A9435232CA67532B4D31874412C) (possibly using package `jagam`) and [spatial analyses](https://r-nimble.org/html_manual/cha-spatial.html).
 
