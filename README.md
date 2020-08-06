@@ -12,7 +12,7 @@
 
 ### Schedule / Programme
 
-:uk: Videos are in French, but you may enable subtitles (or closed captions) by clicking on the :gear: icon in Youtube (`R` is captioned as glass for some reasons) :fr: Vidéos disponibles en français
+:uk: Videos are in French, but you may enable subtitles (or closed captions) by clicking on the :gear: icon in Youtube (beware though, `R` is captioned as glass for some reasons :wine_glass:) :fr: Vidéos disponibles en français
 
 1. :uk: Bayesian inference: Motivation and simple example (video starts [here](https://youtu.be/ncOCz-HTZS4?t=4)) :fr: Inférence bayésienne : motivation et exemple simple (la vidéo commence [ici](https://youtu.be/ncOCz-HTZS4?t=4))
 2. :uk: The likelihood (video starts [here](https://youtu.be/ncOCz-HTZS4?t=1907)) :fr: La vraisemblance (la vidéo commence [ici](https://youtu.be/ncOCz-HTZS4?t=1907)) 
@@ -59,7 +59,7 @@
 ### Licence / License
 
 :uk: This work is licensed under a
-[Creative Commons Attribution 4.0 International License][http://creativecommons.org/licenses/by/4.0/] :fr: Ce travail est sous license [Creative Commons Attribution 4.0 International License][http://creativecommons.org/licenses/by/4.0/]
+[Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/) :fr: Ce travail est sous license [Creative Commons Attribution 4.0 International License](http://creativecommons.org/licenses/by/4.0/)
 
 ### To-do list
 
