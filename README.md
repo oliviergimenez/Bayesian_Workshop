@@ -26,8 +26,8 @@
 
 * :uk: Slides available [here](https://doi.org/10.6084/m9.figshare.12656894.v2) :fr: Diapos disponible [ici](https://doi.org/10.6084/m9.figshare.12656894.v2)
 * :uk: Videos available in French via Youtube (you may enable subtitles or closed captions by clicking on the gear icon; `R` is captioned as glass for some reasons) :fr: Vidéos disponibles en français
-   + slides 1-80, watch [here](https://youtu.be/ncOCz-HTZS4) / diapos 1-80, regardez [ici](https://youtu.be/ncOCz-HTZS4)
-   + slides 81-131, watch [here](https://youtu.be/Aj3-LR9zcDs) / diapos 81-131, regardez [ici](https://youtu.be/Aj3-LR9zcDs)
+   + slides 1-80, watch [here](https://youtu.be/ncOCz-HTZS4?t=1) / diapos 1-80, regardez [ici](https://youtu.be/ncOCz-HTZS4?t=1)
+   + slides 81-131, watch [here](https://youtu.be/Aj3-LR9zcDs?t=1) / diapos 81-131, regardez [ici](https://youtu.be/Aj3-LR9zcDs?t=1)
    + slides 132-171, watch [here](https://youtu.be/gprytbDxcD8?t=1) / diapos 132-171, regardez [ici](https://youtu.be/gprytbDxcD8?t=1) 
    + slides 172-end, watch [here]() / diapos 172-fin, regardez [ici]() 
 * :uk: All material prepared in `R` / Matériel préparé avec `R`
