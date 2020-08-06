@@ -5,10 +5,10 @@
 
 ### Learning objectives / Objectifs pédagogiques
 
-* Try and demystify Bayesian statistics, and MCMC methods / Essayer de démystifier les statistiques bayésiennes, et les méthodes MCMC
-* Make the difference between Bayesian and Frequentist analyses / Faire la différence entre analyses bayésiennes et fréquentistes
-* Understand the Methods section of a paper that does Bayesian stuff / Comprendre la section Méthodes d'un papier qui utilise le bayésien
-* Run Bayesian analyses with `R` (in Jags) / Implémenter des analyses bayésiennes avec `R` 
+* :uk: Try and demystify Bayesian statistics, and MCMC methods :fr: Essayer de démystifier les statistiques bayésiennes, et les méthodes MCMC
+* :uk: Make the difference between Bayesian and Frequentist analyses :fr: Faire la différence entre analyses bayésiennes et fréquentistes
+* :uk: Understand the Methods section of a paper that does Bayesian stuff :fr: Comprendre la section Méthodes d'un papier qui utilise le bayésien
+* :uk: Run Bayesian analyses with `R` (in Jags) :fr: Implémenter des analyses bayésiennes avec `R` 
 
 ### Schedule / Programme
 
@@ -26,9 +26,9 @@ Videos are in French, but you may enable subtitles (or closed captions) by click
 
 * Slides available [here](https://doi.org/10.6084/m9.figshare.12656894.v2) / Diapos disponible [ici](https://doi.org/10.6084/m9.figshare.12656894.v2)
 * Videos available in French via Youtube (you may enable subtitles or closed captions by clicking on the gear icon; `R` is captioned as glass for some reasons) / Vidéos disponibles en français
-   + slides 1-80, watch [here](https://www.youtube.com/watch?v=ncOCz-HTZS4&t=4234s) / diapos 1-80, regardez [ici](https://www.youtube.com/watch?v=ncOCz-HTZS4&t=4234s)
-   + slides 81-131, watch [here](https://www.youtube.com/watch?v=Aj3-LR9zcDs&t=24s) / diapos 81-131, regardez [ici](https://www.youtube.com/watch?v=Aj3-LR9zcDs&t=24s)
-   + slides 132-171, watch [here](https://www.youtube.com/watch?v=gprytbDxcD8) / diapos 132-171, regardez [ici](https://www.youtube.com/watch?v=gprytbDxcD8) 
+   + slides 1-80, watch [here](https://youtu.be/ncOCz-HTZS4) / diapos 1-80, regardez [ici](https://youtu.be/ncOCz-HTZS4)
+   + slides 81-131, watch [here](https://youtu.be/Aj3-LR9zcDs) / diapos 81-131, regardez [ici](https://youtu.be/Aj3-LR9zcDs)
+   + slides 132-171, watch [here](https://youtu.be/gprytbDxcD8?t=1) / diapos 132-171, regardez [ici](https://youtu.be/gprytbDxcD8?t=1) 
    + slides 172-end, watch [here]() / diapos 172-fin, regardez [ici]() 
 * All material prepared in `R` / Matériel préparé avec `R`
    + `R` code available [here](https://raw.githubusercontent.com/oliviergimenez/Bayesian_Workshop/master/BayesianStatistics_OGimenez.R) / code `R` disponible  [ici](https://raw.githubusercontent.com/oliviergimenez/Bayesian_Workshop/master/BayesianStatistics_OGimenez.R)
