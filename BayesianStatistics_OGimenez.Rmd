@@ -1712,6 +1712,7 @@ storks
 res <- as.mcmc(storks) # convert outputs in a list
 res <- rbind(res[[1]],res[[2]]) # put two MCMC lists on top of each other
 head(res)
+tail(res)
 ```
 
 ## Compute a posteriori Pr(rain < 0)
@@ -1766,6 +1767,10 @@ head(stupid_pd)
 * Plot the distribution
 ```{r}
 plot(density(stupid_pd), xlab = '', main = '', lwd = 3)
+
+mean(stupid_pd > 0)
+
+hist(stupid_pd)
 ```
 
 
@@ -2152,7 +2157,8 @@ n <- length(y)
 # graphical representation
 library(lattice)
 dat <- data.frame(Biomass=x,nb_grain=y,Species=Sp)
-xyplot(log(nb_grain) ~ Biomass | Species,data=dat,xlab='Biomass',ylab='Number of grains (log transformed)')
+xyplot(log(nb_grain) ~ Biomass | Species,data=dat,
+       xlab='Biomass',ylab='Number of grains (log transformed)')
 ```
 
 
@@ -2215,9 +2221,9 @@ xyplot(log(nb_grain) ~ Biomass | Species,data=dat,xlab='Biomass',ylab='Number of
 
 ```{r}
 # read in data
-VMG <- read.table("dat/VMG.csv", header=TRUE, dec= ".", sep =";")
-# nb of seeds (log)
-y <- VMG$NGrTotest
+VMG <- read.table("https://raw.githubusercontent.com/oliviergimenez/Bayesian_Workshop/master/dat/VMG.csv", header=TRUE, dec= ".", sep =";")
+# nb of seeds
+y <- log(VMG$NGrTotest)
 # biomass
 x <- VMG$Vm
 x <- (x - mean(x))/sd(x)
@@ -2268,9 +2274,13 @@ allom.parameters <- c("a", "b", "sigma.y")
 ## Run Jags
 
 ```{r}
-allom.1 <- R2jags::jags(allom.data,inits,allom.parameters,
-                        n.iter = 2500,model.file="code/completepooling.bug", 
-                        n.chains = 2, n.burn = 1000)
+allom.1 <- jags(allom.data,
+                inits,
+                allom.parameters,
+                n.iter = 2500,
+                model.file="code/completepooling.bug", 
+                n.chains = 2, 
+                n.burn = 1000)
 ```
 
 ## Display results
@@ -2278,6 +2288,12 @@ allom.1 <- R2jags::jags(allom.data,inits,allom.parameters,
 ```{r}
 allom.1
 ```
+
+```{r}
+freq_lm <- lm(y ~ x,allom.data)	
+summary(freq_lm)
+```
+
 
 ## Output
 
@@ -2330,7 +2346,11 @@ writeLines(model,"code/varint.bug")
 ```
 
 ```{r message=FALSE, warning=FALSE, include=FALSE}
-allom.data <- list (n=n, nbspecies= nbspecies,x=x,y=y,species=species)
+allom.data <- list (n=n, 
+                    nbspecies= nbspecies,
+                    x=x,
+                    y=y,
+                    species=species)
 
 # on specifie le modele 
 model <- 
@@ -2363,9 +2383,19 @@ init2 <- list(a=rnorm(nbspecies), b=rnorm(1), mu.a=rnorm(1),sigma.y=runif(1), si
 inits<-list(init1,init2)
 allom.parameters <- c ("a", "b", "mu.a","sigma.y", "sigma.a")
 # run JAGS
-allom.2 <- R2jags::jags(allom.data,inits,allom.parameters, n.iter = 2500,model.file="code/varint.bug", n.chains = 2, n.burn = 1000)
+allom.2 <- jags(allom.data,inits,allom.parameters, n.iter = 2500,model.file="code/varint.bug", n.chains = 2, n.burn = 1000)
 allom.2
+```
 
+```{r}
+library(lme4)
+freq_lmm <- lmer(y ~ x + (1 | species), allom.data, REML = FALSE)	
+summary(freq_lmm)
+```
+
+
+
+```{r message=FALSE, warning=FALSE, include=FALSE}
 ## graph (correction BUG 2015)
 acoef.sp <- allom.2$BUGSoutput$summary[1:33,1]
 bcoef <- allom.2$BUGSoutput$summary[34,1]
@@ -2496,6 +2526,70 @@ xyplot(y ~ x | Sp, panel=panelfun3,
        lines = list(lwd = 3, col = c("green", "red", "blue"),
        type = c("l", "l", "l"))))
 ```
+
+
+```{r}
+freq_lmm2 <- lmer (y ~ x + (1 + x | species), allom.data, REML = FALSE)	
+summary(freq_lmm2)
+```
+```{r}
+freq_lmm_wocorr <- lmer(y ~ x + (1 | species) + 	
+                                   (0 + x | species), allom.data, REML = FALSE)	
+summary(freq_lmm_wocorr)
+
+
+
+
+lm(y ~ -1 + as.factor(species) + x, allom.data)	
+
+```
+```{r}
+model <- 	
+paste("	
+# varying-intercept, varying-slope allometry model 	
+# with Vm as a species predictor 	
+	
+model {	
+  for (i in 1:n){	
+    y[i] ~ dnorm (mu[i], tau.y)	
+    mu[i] <- a[species[i]] + b[species[i]] * x[i]	
+  }	
+	
+  tau.y <- pow(sigma.y, -2)	
+  sigma.y ~ dunif (0, 100)	
+	
+  for (j in 1:nbspecies){	
+    a[j] ~ dnorm (mu.a, tau.a)	
+    b[j] ~ dnorm (mu.b, tau.b)	
+  }	
+  	
+  mu.a ~ dnorm (0, .0001)	
+  tau.a <- pow(sigma.a, -2)	
+  sigma.a ~ dunif (0, 100)	
+	
+  mu.b ~ dnorm (0, .0001)	
+  tau.b <- pow(sigma.b, -2)	
+  sigma.b ~ dunif (0, 100)	
+	
+}	
+")	
+writeLines(model,"varintvarslope.bug")	
+	
+init1 <- list (a=rnorm(nbspecies), b=rnorm(nbspecies), mu.a=rnorm(1),mu.b=rnorm(1),	
+sigma.y=runif(1), sigma.a=runif(1), sigma.b=runif(1))	
+init2 <- list (a=rnorm(nbspecies), b=rnorm(nbspecies), mu.a=rnorm(1),mu.b=rnorm(1),	
+sigma.y=runif(1), sigma.a=runif(1), sigma.b=runif(1))	
+inits<-list(init1,init2)	
+allom.parameters <- c ("a", "b", "mu.a","mu.b", "sigma.y", "sigma.a", "sigma.b")	
+	
+allom.3 <- R2jags::jags(allom.data,inits,allom.parameters, n.iter = 2500,model.file="varintvarslope.bug", n.chains = 2, n.burn = 1000)	
+allom.3	
+
+
+
+
+```
+
 
 ## Shrinkage results from pooling of information
 
